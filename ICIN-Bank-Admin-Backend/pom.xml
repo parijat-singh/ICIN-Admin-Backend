@@ -9,10 +9,10 @@
 		<relativePath/> <!-- lookup parent from repository -->
 	</parent>
 	<groupId>com.simplilearn.workshop</groupId>
-	<artifactId>admin_service</artifactId>
-	<version>0.0.1-SNAPSHOT</version>
-	<name>admin_service</name>
-	<description>Admin service for icin bank</description>
+	<artifactId>ICIN-Bank-Admin-Backend</artifactId>
+	<version>1.0</version>
+	<name>ICIN-Bank-Admin-Backend</name>
+	<description>PGFSD Capstone Project - ICIN Bank - Parijat Singh</description>
 
 	<properties>
 		<java.version>11</java.version>
