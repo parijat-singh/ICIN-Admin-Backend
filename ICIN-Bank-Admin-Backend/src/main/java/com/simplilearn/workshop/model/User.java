@@ -30,8 +30,6 @@ public class User{
 	private String password;
 	 @JsonFormat(shape=JsonFormat.Shape.STRING, pattern="dd-MM-yyyy")
 	private Date dob;
-	private String identityType; 
-	private String identity;
 	
 	@Column(columnDefinition = "boolean default false")
 	private boolean status;
@@ -51,18 +49,6 @@ public class User{
 	}
 	public void setDob(Date dob) {
 		this.dob = dob;
-	}
-	public String getIdentityType() {
-		return identityType;
-	}
-	public void setIdentityType(String identityType) {
-		this.identityType = identityType;
-	}
-	public String getIdentity() {
-		return identity;
-	}
-	public void setIdentity(String identity) {
-		this.identity = identity;
 	}
 	public int getFeatureStatus() {
 		return featureStatus;
