@@ -14,10 +14,10 @@ import com.simplilearn.workshop.repository.UserRepository;
 public class SaccountCreationImpl {
 	
 	@Autowired
-	SaccountRepository dao;
+	SaccountRepository sardata;
 	
 	@Autowired
-	UserRepository udao;
+	UserRepository urdata;
 	
 	private static String acctPrefix = "5000000000" ;
 	
@@ -30,8 +30,8 @@ public class SaccountCreationImpl {
 		Saccount account =new Saccount();
 		account.setUsername(username);
 		account.setAccno(generate_saving(userId));
-		account.setUser(udao.findByUsername(username));
-		return dao.save(account);
+		account.setUser(urdata.findByUsername(username));
+		return sardata.save(account);
 	}
 
 }

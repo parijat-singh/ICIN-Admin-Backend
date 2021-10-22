@@ -24,22 +24,22 @@ import com.simplilearn.workshop.service.AdminService;
 public class AdminServiceImpl implements AdminService{
 	
 	@Autowired
-	private TransferRepository transDAO;
+	private TransferRepository trdata;
 	
 	@Autowired
-	private ChequeBookRequestsRepository chequeBookDAO;
+	private ChequeBookRequestsRepository cbdata;
 	
 	@Autowired
-	private UserRepository userDao;
+	private UserRepository urdata;
 	
 	@Autowired
-	private UserDisplayRepository displayDao;
+	private UserDisplayRepository udrdata;
 	
 	@Autowired
-	private AccountRepository accDao;
+	private AccountRepository ardata;
 	
 	@Autowired
-	private SaccountRepository sAccDao;
+	private SaccountRepository sardata;
 	
 	@Autowired
 	private AccountsCreationImpl accService;
@@ -49,9 +49,9 @@ public class AdminServiceImpl implements AdminService{
 	
 	@Override
 	public void authorizeUser(String username) {
-		userDao.authorizeUser(username);
+		urdata.authorizeUser(username);
 		System.out.println("error here top");
-		User currUser = userDao.findByUsername(username);
+		User currUser = urdata.findByUsername(username);
 		int userId = currUser.getId();
 		System.out.println("error here 1");
 		accService.newAccount(username,userId);
@@ -61,42 +61,42 @@ public class AdminServiceImpl implements AdminService{
 	
 	@Override
 	public void cancelAuthorization(String username) {
-		userDao.cancelAuthorization(username);
+		urdata.cancelAuthorization(username);
 	}
 
 	@Override
 	public void acceptChequebookRequest(long accNo) {
 		String username = "";
-		chequeBookDAO.setChequebookInfoByAccount(accNo);
+		cbdata.setChequebookInfoByAccount(accNo);
 		if(Long.toString(accNo).length() == 7) {
-			username = accDao.findByAccno(accNo).getUsername();
+			username = ardata.findByAccno(accNo).getUsername();
 		}
 		else {
-			username = sAccDao.findByAccno(accNo).getUsername();
+			username = sardata.findByAccno(accNo).getUsername();
 		}
 	}
 
 	@Override
 	public void enableUser(String username) {
-		userDao.enableUser(username);
+		urdata.enableUser(username);
 		
 	}
 
 	@Override
 	public void disableUser(String username) {
-		userDao.disableUser(username);
+		urdata.disableUser(username);
 		
 	}
 
 	@Override
 	public List<UserDisplay> getAllUsers() {
-		return displayDao.getAllUsers();
+		return udrdata.getAllUsers();
 	}
 
 	@Override
 	public List<Transfer> getAllTransactions(long accountNo) {
-		List<Transfer> sender=transDAO.findBySaccount(accountNo);
-		List<Transfer> receiver=transDAO.findByRaccount(accountNo);
+		List<Transfer> sender=trdata.findBySaccount(accountNo);
+		List<Transfer> receiver=trdata.findByRaccount(accountNo);
 		List<Transfer> merged=new ArrayList<>();
 		merged.addAll(sender);
 		merged.addAll(receiver);
@@ -106,17 +106,17 @@ public class AdminServiceImpl implements AdminService{
 
 	@Override
 	public List<ChequebookRequest> getAllChequebookRequests() {
-		return chequeBookDAO.findAllChequebookRequests();
+		return cbdata.findAllChequebookRequests();
 	}
 
 	@Override
 	public List<User> getAllUnauthorizedUsers() {
-		return userDao.findAllUnauthorizedAccounts();
+		return urdata.findAllUnauthorizedAccounts();
 	}
 
 	@Override
 	public void setUserFeatures(String username, int featureId) {
-		userDao.setUserFeatureStatus(username,featureId);
+		urdata.setUserFeatureStatus(username,featureId);
 		
 	}
 	
@@ -133,10 +133,10 @@ public class AdminServiceImpl implements AdminService{
 	@Override
 	public UserDisplay searchUser(String userDetail) {
 		if(isNumber(userDetail)) {
-			return displayDao.getUserDetailsByAccountNo(Long.parseLong(userDetail));
+			return udrdata.getUserDetailsByAccountNo(Long.parseLong(userDetail));
 		}
 		else {
-			return displayDao.getUserDetailsByUsername(userDetail);
+			return udrdata.getUserDetailsByUsername(userDetail);
 		}
 		
 	}

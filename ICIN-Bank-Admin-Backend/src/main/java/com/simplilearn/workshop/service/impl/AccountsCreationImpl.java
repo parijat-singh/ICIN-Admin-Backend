@@ -16,7 +16,7 @@ public class AccountsCreationImpl {
 	AccountRepository dao;
 	
 	@Autowired
-	private UserRepository udao;
+	private UserRepository urdata;
 	
 	private static String acctPrefix = "1000000000";
     
@@ -24,7 +24,7 @@ public class AccountsCreationImpl {
 		Account account=new Account();
 		account.setUsername(username);
 		account.setAccno(generate_saving(userId));
-		account.setUser(udao.findByUsername(username));
+		account.setUser(urdata.findByUsername(username));
 		return dao.save(account);
 
 	}

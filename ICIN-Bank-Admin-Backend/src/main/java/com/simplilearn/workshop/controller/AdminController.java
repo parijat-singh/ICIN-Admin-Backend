@@ -19,18 +19,18 @@ import com.simplilearn.workshop.service.impl.AdminServiceImpl;
 public class AdminController {
 	
 	@Autowired
-	private AdminServiceImpl service;
+	private AdminServiceImpl admservice;
 	
 	
 	@GetMapping("user/{username}/features/{featureId}")
 	public void setUserFeatures(@PathVariable("username") String username, @PathVariable("featureId") int featureId) {
-		service.setUserFeatures(username, featureId);
+		admservice.setUserFeatures(username, featureId);
 	}
 	
 	@GetMapping("user/{username}/authorize")
 	public void authorizeUser(@PathVariable("username") String username) {
 		try {
-			service.authorizeUser(username);
+			admservice.authorizeUser(username);
 		} catch (Exception e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
@@ -39,49 +39,49 @@ public class AdminController {
 	
 	@GetMapping("user/{username}/authorize/cancel")
 	public void  cancelAuthorization(@PathVariable("username") String username) {
-		service.cancelAuthorization(username);
+		admservice.cancelAuthorization(username);
 	}
 	
 	@GetMapping("user/unauthorized/all")
 	public List<User> getAllUnauthorizedUsers()
 	{
-		return service.getAllUnauthorizedUsers();
+		return admservice.getAllUnauthorizedUsers();
 	}
 	
 	@GetMapping("/user/all")
 	public List<UserDisplay> getAllUsers()
 	{
-		return service.getAllUsers();
+		return admservice.getAllUsers();
 	}
 	
 	
 	@GetMapping("/chequebook/request/all")
 	public List<ChequebookRequest> getAllChequeBookRequests()
 	{
-		return service.getAllChequebookRequests();
+		return admservice.getAllChequebookRequests();
 	}
 	
 	@GetMapping("/user/{accNo}/chequebook/request/confirm")
 	public void confirmChequeBookRequest(@PathVariable("accNo") long accNo)
 	{
-		service.acceptChequebookRequest(accNo);
+		admservice.acceptChequebookRequest(accNo);
 	}
 	
 	@GetMapping("/user/{username}/enable")
 	public void enableUser(@PathVariable("username") String username)
 	{
-		service.enableUser(username);
+		admservice.enableUser(username);
 	}
 	
 	@GetMapping("/user/{username}/disable")
 	public void disableUser(@PathVariable("username") String username)
 	{
-		service.disableUser(username);
+		admservice.disableUser(username);
 	}
 	
 	@GetMapping("search/user/{userDetail}")
 	public UserDisplay searchUser(@PathVariable("userDetail") String userDetail) {
-		return service.searchUser(userDetail);
+		return admservice.searchUser(userDetail);
 	}
 	
 }
