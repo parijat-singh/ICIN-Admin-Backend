@@ -13,7 +13,7 @@ import com.simplilearn.workshop.repository.UserRepository;
 public class AccountsCreationImpl {
 	
 	@Autowired
-	AccountRepository dao;
+	AccountRepository ardata;
 	
 	@Autowired
 	private UserRepository urdata;
@@ -25,7 +25,7 @@ public class AccountsCreationImpl {
 		account.setUsername(username);
 		account.setAccno(generate_saving(userId));
 		account.setUser(urdata.findByUsername(username));
-		return dao.save(account);
+		return ardata.save(account);
 
 	}
 
